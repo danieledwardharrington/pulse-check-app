@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen titles -->
+    <string name="step_one_title">A quiet moment, just for you.</string>
+    <string name="step_two_title">What should we call you?</string>
+    <string name="step_three_title">What brings you to Lumen?</string>
+    <string name="step_four_title">What matters most in your life right now?</string>
+    <string name="step_five_title">When would you like to check in?</string>
+    <string name="step_six_title">Your privacy comes first.</string>
+    <string name="step_seven_title">Let\'s do your first check-in together.</string>
+
+    <!-- Screen super titles -->
+    <string name="step_two_supertitle">Let\s get acquainted</string>
+    <string name="step_three_supertitle">Your intention</string>
+    <string name="step_four_supertitle">Focus areas</string>
+    <string name="step_five_supertitle">Your daily ritual</string>
+    <string name="step_six_supertitle">A few things to know</string>
+
+    <!-- Screen descriptions -->
+    <string name="step_one_description">Lumen is a daily check-in that helps you understand your emotional patterns over time &#8212; gently, and at your own pace.</string>
+    <string name="step_two_description">Your name is how Lumen will greet you each day.</string>
+    <string name="step_four_description">Choose as many as feel right.</string>
+    <string name="step_five_description">One check-in per day. A single, intentional moment. You can always this time from the Profile screen.</string>
+    <string name="step_seven_description">It only takes a couple of minutes. This first check-in will help us understand your starting point.</string>
+
+    <!-- Button text -->
+    <string name="button_get_started">Get started</string>
+    <string name="button_have_account">I already have an account</string>
+    <string name="button_continue">Continue</string>
+    <string name="button_understand">I understand</string>
+    <string name="button_later">Maybe later</string>
+    <string name="button_begin_check_in">Begin check-in</string>
+
+</resources>

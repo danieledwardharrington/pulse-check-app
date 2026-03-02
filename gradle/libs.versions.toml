@@ -24,6 +24,7 @@ composeCoil = "3.4.0"
 composeNav = "2.9.7"
 composeAnimation = "1.10.4"
 composeMaterial = "1.4.0"
+composeMaterialAdaptive = "1.2.0"
 
 coroutines = "1.10.2"
 
@@ -60,7 +61,7 @@ compose-gradle-plugin = { module = "org.jetbrains.kotlin.plugin.compose:org.jetb
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial" }
 compose-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-compose-adaptive = { module = "androidx.compose.material3:material3-adaptive" }
+compose-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "composeMaterialAdaptive" }
 compose-ui = { module = "androidx.compose.ui:ui" }
 compose-activities = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeViewModel" }

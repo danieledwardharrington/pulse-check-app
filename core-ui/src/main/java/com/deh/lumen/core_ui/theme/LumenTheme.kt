@@ -23,49 +23,49 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 
 private val LumenDarkColorScheme = darkColorScheme(
     // Backgrounds
-    background        = LumenColor.Background,
-    surface           = LumenColor.Surface,
-    surfaceVariant    = LumenColor.SurfaceVariant,
+    background = LumenColor.Background,
+    surface = LumenColor.Surface,
+    surfaceVariant = LumenColor.SurfaceVariant,
 
     // Primary — used by M3 components (buttons, FABs, etc.)
-    primary           = LumenColor.AccentViolet,
-    onPrimary         = LumenColor.OnPrimary,
-    primaryContainer  = LumenColor.AccentVioletSubtle,
+    primary = LumenColor.AccentViolet,
+    onPrimary = LumenColor.OnPrimary,
+    primaryContainer = LumenColor.AccentVioletSubtle,
     onPrimaryContainer = LumenColor.AccentViolet,
 
     // Secondary — rose accent
-    secondary         = LumenColor.AccentRose,
-    onSecondary       = LumenColor.OnPrimary,
+    secondary = LumenColor.AccentRose,
+    onSecondary = LumenColor.OnPrimary,
     secondaryContainer = LumenColor.AccentRoseSubtle,
     onSecondaryContainer = LumenColor.AccentRose,
 
     // Tertiary — gold accent
-    tertiary          = LumenColor.AccentGold,
-    onTertiary        = LumenColor.OnPrimary,
+    tertiary = LumenColor.AccentGold,
+    onTertiary = LumenColor.OnPrimary,
     tertiaryContainer = LumenColor.AccentGoldSubtle,
     onTertiaryContainer = LumenColor.AccentGold,
 
     // Text
-    onBackground      = LumenColor.TextPrimary,
-    onSurface         = LumenColor.TextPrimary,
-    onSurfaceVariant  = LumenColor.TextMuted,
+    onBackground = LumenColor.TextPrimary,
+    onSurface = LumenColor.TextPrimary,
+    onSurfaceVariant = LumenColor.TextMuted,
 
     // Error / destructive
-    error             = LumenColor.Destructive,
-    onError           = LumenColor.OnPrimary,
-    errorContainer    = LumenColor.DestructiveSubtle,
-    onErrorContainer  = LumenColor.Destructive,
+    error = LumenColor.Destructive,
+    onError = LumenColor.OnPrimary,
+    errorContainer = LumenColor.DestructiveSubtle,
+    onErrorContainer = LumenColor.Destructive,
 
     // Outline — borders and dividers
-    outline           = LumenColor.Border,
-    outlineVariant    = LumenColor.BorderFocused,
+    outline = LumenColor.Border,
+    outlineVariant = LumenColor.BorderFocused,
 )
 
 val LumenShapes = Shapes(
     extraSmall = RoundedCornerShape(10.dp),   // input fields, answer boxes
-    small      = RoundedCornerShape(14.dp),   // --radius-sm: cards, buttons, chips
-    medium     = RoundedCornerShape(20.dp),   // pill chips, month tabs
-    large      = RoundedCornerShape(24.dp),   // --radius: user card, insight hero, tip card
+    small = RoundedCornerShape(14.dp),   // --radius-sm: cards, buttons, chips
+    medium = RoundedCornerShape(20.dp),   // pill chips, month tabs
+    large = RoundedCornerShape(24.dp),   // --radius: user card, insight hero, tip card
     extraLarge = RoundedCornerShape(44.dp),   // phone shell border radius (not used in app UI)
 )
 
@@ -125,8 +125,8 @@ private val LumenDarkExtendedColors = LumenExtendedColors(
     ),
 
     glowViolet = LumenColor.AccentVioletGlow,
-    glowRose   = LumenColor.AccentRoseGlow,
-    glowGold   = LumenColor.AccentGoldGlow,
+    glowRose = LumenColor.AccentRoseGlow,
+    glowGold = LumenColor.AccentGoldGlow,
 )
 
 data class LumenSpacing(
