@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.deh.lumen.core_ui.composables.LumenButton
 import com.deh.lumen.core_ui.theme.LumenTheme
 import com.deh.lumen.onboarding.OnboardingStep
 import com.deh.lumen.onboarding.R
@@ -26,7 +28,7 @@ fun OnboardingScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(all = 16.dp)
-            .background(LumenTheme.colorScheme.background),
+            .background(LumenTheme.colors.background),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         val textAlignment = if (onboardingStep is OnboardingStep.Welcome) TextAlign.Center else TextAlign.Start
@@ -43,7 +45,7 @@ fun OnboardingScreen(
                 text = stringResource(onboardingStep.supertitleRes).uppercase(),
                 textAlign = textAlignment,
                 style = LumenTheme.typography.bodyMedium,
-                color = LumenTheme.colorScheme.onSurfaceVariant
+                color = LumenTheme.colors.onSurfaceVariant
             )
         }
 
@@ -51,7 +53,7 @@ fun OnboardingScreen(
             text = stringResource(onboardingStep.titleRes),
             textAlign = textAlignment,
             style = LumenTheme.typography.headlineLarge.copy(fontStyle = FontStyle.Italic),
-            color = LumenTheme.colorScheme.onBackground
+            color = LumenTheme.colors.onBackground
         )
 
         if (onboardingStep.descriptionRes != null) {
@@ -59,7 +61,7 @@ fun OnboardingScreen(
                 text = stringResource(onboardingStep.descriptionRes),
                 textAlign = TextAlign.Center,
                 style = LumenTheme.typography.bodyMedium,
-                color = LumenTheme.colorScheme.onSurfaceVariant
+                color = LumenTheme.colors.onSurfaceVariant
             )
         }
 
@@ -68,6 +70,24 @@ fun OnboardingScreen(
                 onNameChange = {}
             )
             else -> {}
+        }
+
+        LumenButton(
+            buttonText = stringResource(onboardingStep.firstButtonTextRes),
+            isEnabled = true, // TODO: enable/disable based on input/choices
+            onButtonClick = {
+                // TODO: Continue button click
+            }
+        )
+
+        if (onboardingStep.secondButtonTextRes != null) {
+            LumenButton(
+                buttonText = stringResource(onboardingStep.secondButtonTextRes),
+                backgroundColor = Color.Transparent,
+                onButtonClick = {
+                    // TODO: Negative button click
+                }
+            )
         }
     }
 }

@@ -2,6 +2,7 @@ package com.deh.lumen.onboarding.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -31,13 +32,14 @@ fun NameInput(
         },
         textStyle = LumenTheme.typography.titleLarge.copy(fontStyle = FontStyle.Italic),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = LumenTheme.colorScheme.onBackground,
-            unfocusedTextColor = LumenTheme.colorScheme.onBackground,
-            focusedContainerColor = LumenTheme.colorScheme.surface,
-            unfocusedContainerColor = LumenTheme.colorScheme.surface,
-            focusedBorderColor = LumenTheme.colorScheme.outlineVariant,
-            unfocusedBorderColor = LumenTheme.colorScheme.outline
+            focusedTextColor = LumenTheme.colors.onBackground,
+            unfocusedTextColor = LumenTheme.colors.onBackground,
+            focusedContainerColor = LumenTheme.colors.surface,
+            unfocusedContainerColor = LumenTheme.colors.surface,
+            focusedBorderColor = LumenTheme.colors.outlineVariant,
+            unfocusedBorderColor = LumenTheme.colors.outline
         ),
-        singleLine = true
+        singleLine = true,
+        shape = RoundedCornerShape(14.dp)
     )
 }

@@ -84,7 +84,7 @@ data class LumenExtendedColors(
     val moodStrugglingSubtle: Color,
 
     // Gradients — use with Brush.linearGradient()
-    val gradientCta: Brush,
+    val buttonCta: Color,
     val gradientTip: Brush,
     val gradientCardBorder: Brush,
     val gradientLogo: Brush,
@@ -107,9 +107,7 @@ private val LumenDarkExtendedColors = LumenExtendedColors(
     moodStruggling = LumenColor.MoodStruggling,
     moodStrugglingSubtle = LumenColor.MoodStrugglingSubtle,
 
-    gradientCta = Brush.linearGradient(
-        colors = listOf(LumenColor.GradientCtaStart, LumenColor.GradientCtaEnd)
-    ),
+    buttonCta = LumenColor.ButtonCta,
     gradientTip = Brush.linearGradient(
         colors = listOf(LumenColor.GradientTipStart, LumenColor.GradientTipEnd)
     ),
@@ -169,7 +167,7 @@ fun LumenTheme(
     darkTheme: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = LumenDarkColorScheme
+    val colors = LumenDarkColorScheme
     val extendedColors = LumenDarkExtendedColors
 
     CompositionLocalProvider(
@@ -177,7 +175,7 @@ fun LumenTheme(
         LocalLumenSpacing provides LumenSpacing(),
     ) {
         MaterialTheme(
-            colorScheme = colorScheme,
+            colorScheme = colors,
             typography = LumenTypography,
             shapes = LumenShapes,
             content = content
@@ -187,7 +185,7 @@ fun LumenTheme(
 
 object LumenTheme {
 
-    val colors: LumenExtendedColors
+    val extendedColors: LumenExtendedColors
         @Composable @ReadOnlyComposable
         get() = LocalLumenColors.current
 
@@ -196,7 +194,7 @@ object LumenTheme {
         get() = LocalLumenSpacing.current
 
     // Passthrough to MaterialTheme for convenience
-    val colorScheme
+    val colors
         @Composable @ReadOnlyComposable
         get() = MaterialTheme.colorScheme
 
