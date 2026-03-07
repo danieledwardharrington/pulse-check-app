@@ -2,28 +2,28 @@ package com.deh.lumen.onboarding.models
 
 import com.deh.lumen.onboarding.R
 
-sealed class OnboardingIntent(
+enum class OnboardingIntent(
     val intentTitleRes: Int,
     val intentDescriptionRes: Int,
     val isSelected: Boolean = false
 ) {
-    data class Awareness(
-        val titleRes: Int = R.string.awareness_title,
-        val descriptionRes: Int = R.string.awareness_description
-    ) : OnboardingIntent(titleRes, descriptionRes)
+    AWARENESS(
+        intentTitleRes = R.string.awareness_title,
+        intentDescriptionRes = R.string.awareness_description,
+    ),
 
-    data class Track(
-        val titleRes: Int = R.string.track_title,
-        val descriptionRes: Int = R.string.track_description
-    ) : OnboardingIntent(titleRes, descriptionRes)
+    TRACK(
+        intentTitleRes = R.string.track_title,
+        intentDescriptionRes = R.string.track_description
+    ),
 
-    data class Reflection(
-        val titleRes: Int = R.string.reflection_title,
-        val descriptionRes: Int = R.string.reflection_description
-    ) : OnboardingIntent(titleRes, descriptionRes)
+    REFLECTION(
+        intentTitleRes = R.string.reflection_title,
+        intentDescriptionRes = R.string.reflection_description
+    ),
 
-    data class Therapy(
-        val titleRes: Int = R.string.therapy_title,
-        val descriptionRes: Int = R.string.therapy_description
-    ) : OnboardingIntent(titleRes, descriptionRes)
+    THERAPY(
+        intentTitleRes = R.string.therapy_title,
+        intentDescriptionRes = R.string.therapy_description
+    )
 }

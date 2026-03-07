@@ -61,6 +61,7 @@ compose-gradle-plugin = { module = "org.jetbrains.kotlin.plugin.compose:org.jetb
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial" }
 compose-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "composeMaterialAdaptive" }
 compose-ui = { module = "androidx.compose.ui:ui" }
 compose-activities = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
@@ -88,6 +89,7 @@ compose = [
     "compose-bom",
     "compose-material3",
     "compose-preview",
+    "compose-tooling",
     "compose-adaptive",
     "compose-ui",
     "compose-activities",
@@ -124,4 +126,3 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-

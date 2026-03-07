@@ -19,6 +19,9 @@ import com.deh.lumen.core_ui.composables.LumenButton
 import com.deh.lumen.core_ui.theme.LumenTheme
 import com.deh.lumen.onboarding.models.OnboardingStep
 import com.deh.lumen.onboarding.R
+import com.deh.lumen.onboarding.models.OnboardingFocus
+import com.deh.lumen.onboarding.models.OnboardingIntent
+import com.deh.lumen.onboarding.ui.steps.FocusGrid
 import com.deh.lumen.onboarding.ui.steps.IntentList
 import com.deh.lumen.onboarding.ui.steps.NameInput
 
@@ -73,9 +76,12 @@ fun OnboardingScreen(
             )
             is OnboardingStep.Intent -> IntentList(
                 onIntentClicked = { },
-                intents = listOf() // TODO: Pass list of intents
+                intents = OnboardingIntent.entries
             )
-
+            is OnboardingStep.Focus -> FocusGrid(
+                onFocusClicked = { },
+                focusAreas = OnboardingFocus.entries
+            )
             else -> {}
         }
 

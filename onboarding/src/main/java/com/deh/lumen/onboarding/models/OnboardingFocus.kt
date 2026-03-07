@@ -2,47 +2,48 @@ package com.deh.lumen.onboarding.models
 
 import com.deh.lumen.onboarding.R
 
-sealed class OnboardingFocus(
+enum class OnboardingFocus(
     val focusRes: Int,
-    val focusEmoji: String
+    val focusEmoji: String,
+    val isSelected: Boolean = false
 ) {
-    data class Work(
-        val focus: Int = R.string.focus_work,
-        val emoji: String = "\uD83D\uDCBC"
-    ) : OnboardingFocus(focus, emoji)
+    WORK(
+        focusRes = R.string.focus_work,
+        focusEmoji = "\uD83D\uDCBC"
+    ),
 
-    data class Relationships(
-        val focus: Int = R.string.focus_relationships,
-        val emoji: String = "\uD83E\uDEF6"
-    ) : OnboardingFocus(focus, emoji)
+    RELATIONSHIPS(
+        focusRes = R.string.focus_relationships,
+        focusEmoji = "\uD83E\uDEF6"
+    ),
 
-    data class Sleep(
-        val focus: Int = R.string.focus_sleep,
-        val emoji: String = "\uD83D\uDE34"
-    ) : OnboardingFocus(focus, emoji)
+    SLEEP(
+        focusRes = R.string.focus_sleep,
+        focusEmoji = "\uD83D\uDE34"
+    ),
 
-    data class Health(
-        val focus: Int = R.string.focus_health,
-        val emoji: String = "\uD83C\uDFC3"
-    ) : OnboardingFocus(focus, emoji)
+    HEALTH(
+        focusRes = R.string.focus_health,
+        focusEmoji = "\uD83C\uDFC3"
+    ),
 
-    data class Social(
-        val focus: Int = R.string.focus_work,
-        val emoji: String = "\uD83D\uDC65"
-    ) : OnboardingFocus(focus, emoji)
+    SOCIAL(
+        focusRes = R.string.focus_social,
+        focusEmoji = "\uD83D\uDC65"
+    ),
 
-    data class Family(
-        val focus: Int = R.string.focus_family,
-        val emoji: String = "\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67"
-    ) : OnboardingFocus(focus, emoji)
+    FAMILY(
+        focusRes = R.string.focus_family,
+        focusEmoji = "\uD83E\uDDD1\u200D\uD83E\uDDD1\u200D\uD83E\uDDD2"
+    ),
 
-    data class Finances(
-        val focus: Int = R.string.focus_finances,
-        val emoji: String = "\uD83D\uDCB0"
-    ) : OnboardingFocus(focus, emoji)
+    FINANCES(
+        focusRes = R.string.focus_finances,
+        focusEmoji = "\uD83D\uDCB0"
+    ),
 
-    data class Growth(
-        val focus: Int = R.string.focus_growth,
-        val emoji: String = "\uD83C\uDF31"
-    ) : OnboardingFocus(focus, emoji)
+    GROWTH(
+        focusRes = R.string.focus_growth,
+        focusEmoji = "\uD83C\uDF31"
+    )
 }

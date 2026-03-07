@@ -10,11 +10,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.deh.lumen.core_ui.theme.LumenTheme
 import com.deh.lumen.onboarding.models.OnboardingIntent
@@ -51,15 +55,21 @@ private fun IntentRadioCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-            .background(color = LumenTheme.colors.surface),
+            .wrapContentHeight(),
         border = BorderStroke(1.dp, borderColor),
-        shape = LumenTheme.shapes.small
+        shape = LumenTheme.shapes.small,
+        colors = CardDefaults.cardColors(
+            containerColor = LumenTheme.colors.surface
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 0.dp
+        )
     ) {
         Row(
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             RadioButton(
                 selected = intent.isSelected,
@@ -82,5 +92,16 @@ private fun IntentRadioCard(
                 )
             }
         }
+    }
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewIntentList() {
+    LumenTheme {
+        IntentList(
+            intents = OnboardingIntent.entries,
+            onIntentClicked = {}
+        )
     }
 }

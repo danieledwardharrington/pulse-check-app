@@ -11,6 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.deh.lumen.core_ui.theme.LumenTheme
 
@@ -41,4 +43,12 @@ fun NameInput(
         singleLine = true,
         shape = LumenTheme.shapes.small
     )
+}
+
+@Composable
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+private fun NameInputPreview() {
+    LumenTheme {
+        NameInput(onNameChange = {})
+    }
 }
