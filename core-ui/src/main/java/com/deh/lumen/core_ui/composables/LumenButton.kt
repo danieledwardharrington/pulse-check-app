@@ -1,7 +1,10 @@
 package com.deh.lumen.core_ui.composables
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
@@ -19,7 +22,44 @@ fun LumenButton(
     modifier: Modifier = Modifier,
     buttonText: String,
     onButtonClick: () -> Unit,
-    backgroundColor: Color = LumenTheme.extendedColors.buttonCta,
+    buttonTextColor: Color = LumenTheme.colors.onPrimary,
+    isEnabled: Boolean = true
+) {
+    Button(
+        modifier = modifier
+            .height(56.dp)
+            .fillMaxWidth(),
+        onClick = { onButtonClick() },
+        border = BorderStroke(1.dp, LumenTheme.colors.outline),
+        colors = ButtonDefaults.buttonColors().copy(
+            containerColor = Color.Transparent
+        ),
+        enabled = isEnabled,
+        contentPadding = PaddingValues()
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(LumenTheme.extendedColors.gradientCta)
+                .then(modifier),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = buttonText,
+                style = LumenTheme.typography.titleSmall,
+                color = buttonTextColor
+            )
+        }
+    }
+}
+
+@Composable
+fun LumenButton(
+    modifier: Modifier = Modifier,
+    buttonText: String,
+    onButtonClick: () -> Unit,
+    backgroundColor: Color,
+    buttonTextColor: Color = LumenTheme.colors.onPrimary,
     isEnabled: Boolean = true
 ) {
     Button(
@@ -31,13 +71,19 @@ fun LumenButton(
         colors = ButtonDefaults.buttonColors().copy(
             containerColor = backgroundColor
         ),
-        enabled = isEnabled
+        enabled = isEnabled,
+        contentPadding = PaddingValues()
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .then(modifier),
+            contentAlignment = Alignment.Center
+        ) {
             Text(
                 text = buttonText,
-                style = LumenTheme.typography.bodyMedium,
-                color = LumenTheme.colors.onPrimary
+                style = LumenTheme.typography.titleSmall,
+                color = buttonTextColor
             )
         }
     }

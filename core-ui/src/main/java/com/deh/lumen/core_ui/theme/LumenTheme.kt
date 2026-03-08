@@ -84,6 +84,7 @@ data class LumenExtendedColors(
     val moodStrugglingSubtle: Color,
 
     // Gradients — use with Brush.linearGradient()
+    val gradientCta: Brush,
     val buttonCta: Color,
     val gradientTip: Brush,
     val gradientCardBorder: Brush,
@@ -107,6 +108,9 @@ private val LumenDarkExtendedColors = LumenExtendedColors(
     moodStruggling = LumenColor.MoodStruggling,
     moodStrugglingSubtle = LumenColor.MoodStrugglingSubtle,
 
+    gradientCta = Brush.linearGradient(
+        colors = listOf(LumenColor.GradientCtaStart, LumenColor.GradientCtaEnd)
+    ),
     buttonCta = LumenColor.ButtonCta,
     gradientTip = Brush.linearGradient(
         colors = listOf(LumenColor.GradientTipStart, LumenColor.GradientTipEnd)

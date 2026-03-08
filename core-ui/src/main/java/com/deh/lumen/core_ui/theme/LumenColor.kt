@@ -96,6 +96,9 @@ object LumenColor {
 
     /** Primary CTA button */
     val ButtonCta = Color(0xFFE8B4B8)
+    /** Primary CTA button gradient — violet to rose */
+    val GradientCtaStart = Color(0xFF9B8EC4)
+    val GradientCtaEnd = Color(0xFFE8B4B8)
 
     /** Top border accent on cards — same gradient, lower opacity applied in composable */
     val GradientCardStart = Color(0xFF9B8EC4)

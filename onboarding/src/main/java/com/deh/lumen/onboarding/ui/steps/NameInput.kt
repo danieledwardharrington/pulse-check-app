@@ -38,7 +38,8 @@ fun NameInput(
             focusedContainerColor = LumenTheme.colors.surface,
             unfocusedContainerColor = LumenTheme.colors.surface,
             focusedBorderColor = LumenTheme.colors.outlineVariant,
-            unfocusedBorderColor = LumenTheme.colors.outline
+            unfocusedBorderColor = LumenTheme.colors.outline,
+            cursorColor = LumenTheme.colors.primary
         ),
         singleLine = true,
         shape = LumenTheme.shapes.small

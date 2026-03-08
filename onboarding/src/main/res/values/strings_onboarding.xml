@@ -17,7 +17,8 @@
     <string name="step_six_supertitle">A few things to know</string>
 
     <!-- Screen descriptions -->
-    <string name="step_one_description">Lumen is a daily check-in that helps you understand your emotional patterns over time &#8212; gently, and at your own pace.</string>
+    <string name="step_one_description">Lumen is a daily check-in that helps you understand your emotional patterns over time &#8212; gently, and at your own pace. No account is required, but you can create one later
+    to enable device syncing if you\'d like.</string>
     <string name="step_two_description">Your name is how Lumen will greet you each day.</string>
     <string name="step_four_description">Choose as many as feel right.</string>
     <string name="step_five_description">One check-in per day. A single, intentional moment. You can always this time from the Profile screen.</string>
@@ -51,6 +52,13 @@
     <string name="focus_sleep">Sleep</string>
     <string name="focus_social">Social</string>
 
+    <!-- Privacy -->
+    <string name="privacy_device_title">Stored on your device</string>
+    <string name="privacy_device_description">Your entries live locally by default. Cloud backup is optional.</string>
+    <string name="privacy_ai_title">AI-powered insights</string>
+    <string name="privacy_ai_description">Your entries are processed by Google Gemini to generate follow-up questions and weekly summaries. No account or identity is linked to your entries. We recommend reviewing Google\'s data handling policies.</string>
+    <string name="privacy_wellbeing_title">Wellbeing monitoring</string>
+    <string name="privacy_wellbeing_description">If your entries suggest serious distress, Lumen will gently surface support resources. You can turn this off at any time.</string>
 
     <!-- Misc -->
     <string name="logo_content_description">Lumen logo</string>
