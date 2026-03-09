@@ -4,14 +4,19 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -19,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.deh.lumen.core_ui.composables.LumenButton
+import com.deh.lumen.core_ui.composables.LumenLinearProgressIndicator
 import com.deh.lumen.core_ui.theme.LumenTheme
 import com.deh.lumen.onboarding.models.OnboardingStep
 import com.deh.lumen.onboarding.R
@@ -48,7 +54,14 @@ fun OnboardingScreen(
                 .background(LumenTheme.colors.background),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            val textAlignment = if (onboardingStep is OnboardingStep.Welcome) TextAlign.Center else TextAlign.Start
+            LumenLinearProgressIndicator(
+                progress = onboardingStep.progress
+            )
+
+            Spacer(modifier = Modifier.height(0.dp)) // Cheat 24dp spacing between progress bar and content
+
+            val isCenterAligned = onboardingStep is OnboardingStep.Welcome || onboardingStep is OnboardingStep.Complete
+            val textAlignment = if (isCenterAligned) TextAlign.Center else TextAlign.Start
 
             if (onboardingStep.logo != null) {
                 Image(
@@ -177,5 +190,13 @@ private fun PreviewOnboardingScreenCheckInTimePicker() {
 private fun PreviewOnboardingScreenPrivacy() {
     LumenTheme {
         OnboardingScreen(onboardingStep = OnboardingStep.Privacy())
+    }
+}
+
+@Composable
+@Preview
+private fun PreviewOnboardingScreenComplete() {
+    LumenTheme {
+        OnboardingScreen(onboardingStep = OnboardingStep.Complete())
     }
 }

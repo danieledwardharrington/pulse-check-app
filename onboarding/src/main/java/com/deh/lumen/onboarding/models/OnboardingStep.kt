@@ -10,7 +10,8 @@ sealed class OnboardingStep(
     @StringRes val supertitleRes: Int?,
     @StringRes val descriptionRes: Int?,
     @StringRes val firstButtonTextRes: Int,
-    @StringRes val secondButtonTextRes: Int?
+    @StringRes val secondButtonTextRes: Int?,
+    val progress: Float
 ) {
     data class Welcome(
         val appLogo: Int? = R.drawable.lumen_logo,
@@ -25,7 +26,8 @@ sealed class OnboardingStep(
         supertitleRes = supertitle,
         descriptionRes = description,
         firstButtonTextRes = firstButtonText,
-        secondButtonTextRes = secondButtonText
+        secondButtonTextRes = secondButtonText,
+        progress = 1 / 7f
     )
 
     data class Name(
@@ -41,7 +43,8 @@ sealed class OnboardingStep(
         supertitleRes = supertitle,
         descriptionRes = description,
         firstButtonTextRes = firstButtonText,
-        secondButtonTextRes = secondButtonText
+        secondButtonTextRes = secondButtonText,
+        progress = 2 / 7f
     )
 
     data class Intent(
@@ -57,7 +60,8 @@ sealed class OnboardingStep(
         supertitleRes = supertitle,
         descriptionRes = description,
         firstButtonTextRes = firstButtonText,
-        secondButtonTextRes = secondButtonText
+        secondButtonTextRes = secondButtonText,
+        progress = 3 / 7f
     )
 
     data class Focus(
@@ -73,7 +77,8 @@ sealed class OnboardingStep(
         supertitleRes = supertitle,
         descriptionRes = description,
         firstButtonTextRes = firstButtonText,
-        secondButtonTextRes = secondButtonText
+        secondButtonTextRes = secondButtonText,
+        progress = 4 / 7f
     )
 
     data class Time(
@@ -89,7 +94,8 @@ sealed class OnboardingStep(
         supertitleRes = supertitle,
         descriptionRes = description,
         firstButtonTextRes = firstButtonText,
-        secondButtonTextRes = secondButtonText
+        secondButtonTextRes = secondButtonText,
+        progress = 5 / 7f
     )
 
     data class Privacy(
@@ -105,7 +111,8 @@ sealed class OnboardingStep(
         supertitleRes = supertitle,
         descriptionRes = description,
         firstButtonTextRes = firstButtonText,
-        secondButtonTextRes = secondButtonText
+        secondButtonTextRes = secondButtonText,
+        progress = 6 / 7f
     )
 
     data class Complete(
@@ -121,7 +128,8 @@ sealed class OnboardingStep(
         supertitleRes = supertitle,
         descriptionRes = description,
         firstButtonTextRes = firstButtonText,
-        secondButtonTextRes = secondButtonText
+        secondButtonTextRes = secondButtonText,
+        progress = 1f
     )
 
 }

@@ -10,7 +10,7 @@
     <string name="step_seven_title">Let\'s do your first check-in together.</string>
 
     <!-- Screen super titles -->
-    <string name="step_two_supertitle">Let\s get acquainted</string>
+    <string name="step_two_supertitle">Let\'s get acquainted</string>
     <string name="step_three_supertitle">Your intention</string>
     <string name="step_four_supertitle">Focus areas</string>
     <string name="step_five_supertitle">Your daily ritual</string>
@@ -18,7 +18,7 @@
 
     <!-- Screen descriptions -->
     <string name="step_one_description">Lumen is a daily check-in that helps you understand your emotional patterns over time &#8212; gently, and at your own pace. No account is required, but you can create one later
-    to enable device syncing if you\'d like.</string>
+    from the Profile screen to enable device syncing if you\'d like.</string>
     <string name="step_two_description">Your name is how Lumen will greet you each day.</string>
     <string name="step_four_description">Choose as many as feel right.</string>
     <string name="step_five_description">One check-in per day. A single, intentional moment. You can always this time from the Profile screen.</string>

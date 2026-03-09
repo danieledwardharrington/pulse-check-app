@@ -35,7 +35,8 @@ fun LumenButton(
             containerColor = Color.Transparent
         ),
         enabled = isEnabled,
-        contentPadding = PaddingValues()
+        contentPadding = PaddingValues(),
+        shape = LumenTheme.shapes.small
     ) {
         Box(
             modifier = Modifier
@@ -72,7 +73,8 @@ fun LumenButton(
             containerColor = backgroundColor
         ),
         enabled = isEnabled,
-        contentPadding = PaddingValues()
+        contentPadding = PaddingValues(),
+        shape = LumenTheme.shapes.small
     ) {
         Box(
             modifier = Modifier

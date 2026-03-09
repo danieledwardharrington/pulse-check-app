@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.datastore.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -50,4 +51,6 @@ dependencies {
     implementation(libs.coroutines.core)
 
     implementation(libs.bundles.sqlcipher)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.security.crypto)
 }

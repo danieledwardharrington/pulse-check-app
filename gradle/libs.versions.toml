@@ -30,12 +30,14 @@ coroutines = "1.10.2"
 
 timber = "5.0.1"
 
-vico = "3.0.1"
+vico = "3.0.2"
 
 billing = "8.3.0"
 
 sqlCipher = "4.13.0"
 sqlLite = "2.6.2"
+datastoreCore = "1.2.0"
+security-crypto = "1.1.0"
 
 [libraries]
 billing = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
@@ -83,6 +85,9 @@ vico-compose = { group = "com.patrykandpatrick.vico", name = "compose", version.
 
 sqlite = { module = "androidx.sqlite:sqlite", version.ref = "sqlLite" }
 sqlcipher = { group = "net.zetetic", name = "sqlcipher-android", version.ref = "sqlCipher" }
+androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastoreCore" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastoreCore" }
+androidx-security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "security-crypto" }
 
 [bundles]
 compose = [
