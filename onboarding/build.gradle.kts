@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -12,7 +13,7 @@ kotlin {
     }
 }
 
-android {
+extensions.configure<LibraryExtension> {
     namespace = "com.deh.lumen.onboarding"
     compileSdk {
         version = release(36)

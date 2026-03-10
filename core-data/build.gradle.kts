@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.LibraryExtension
+import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -11,7 +13,7 @@ kotlin {
     }
 }
 
-android {
+extensions.configure<LibraryExtension> {
     namespace = "com.deh.lumen.core_data"
     compileSdk {
         version = release(36)

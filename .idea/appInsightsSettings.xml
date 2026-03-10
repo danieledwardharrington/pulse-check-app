@@ -36,10 +36,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.deh.lumen" />
+                  <option name="mobileSdkAppId" value="1:631609733494:android:8b2c824d6be219c3e70a57" />
+                  <option name="projectId" value="pulse-check-ddc20" />
+                  <option name="projectNumber" value="631609733494" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

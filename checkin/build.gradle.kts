@@ -1,8 +1,10 @@
+import com.android.build.api.dsl.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -11,8 +13,8 @@ kotlin {
     }
 }
 
-android {
-    namespace = "com.deh.lumen.today"
+extensions.configure<LibraryExtension> {
+    namespace = "com.deh.lumen.checkin"
     compileSdk {
         version = release(36)
     }
@@ -46,4 +48,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.kotlin.datetime)
+
+    implementation(libs.bundles.compose)
+    implementation(project(":core-ui"))
 }
