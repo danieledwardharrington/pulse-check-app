@@ -1,5 +1,7 @@
 package com.deh.lumen.checkin.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.animateValueAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,6 +34,7 @@ fun CheckInQuestionBox(
     checkInQuestion: String,
     onResponseChanged: (String) -> Unit
 ) {
+    val questionText by remember { mutableStateOf(checkInQuestion) }
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -52,11 +55,13 @@ fun CheckInQuestionBox(
         ) {
             var userCheckIn by remember { mutableStateOf("") }
 
-            Text(
-                text = checkInQuestion,
-                color = LumenTheme.colors.onSurface,
-                style = LumenTheme.typography.titleLarge.copy(fontStyle = FontStyle.Italic)
-            )
+            AnimatedContent(questionText) {
+                Text(
+                    text = it,
+                    color = LumenTheme.colors.onSurface,
+                    style = LumenTheme.typography.titleLarge.copy(fontStyle = FontStyle.Italic)
+                )
+            }
 
             OutlinedTextField(
                 modifier = Modifier

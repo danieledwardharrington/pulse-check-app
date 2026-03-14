@@ -13,21 +13,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.deh.lumen.checkin.models.Mood
+import com.deh.lumen.checkin.models.MoodUI
 import com.deh.lumen.core_ui.theme.LumenTheme
 
 @Composable
 fun MoodOrb(
     modifier: Modifier = Modifier,
     orbSize: Int,
-    mood: Mood,
-    onOrbClicked: (Mood) -> Unit
+    moodUI: MoodUI,
+    onOrbClicked: (MoodUI) -> Unit
 ) {
     Box(
         modifier = modifier
             .size(orbSize.dp)
-            .background(color = mood.moodColor, shape = CircleShape)
-            .clickable { onOrbClicked(mood) },
+            .background(color = moodUI.moodColor, shape = CircleShape)
+            .clickable { onOrbClicked(moodUI) },
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -35,12 +35,12 @@ fun MoodOrb(
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
-                text = mood.moodEmoji,
+                text = moodUI.moodEmoji,
                 style = LumenTheme.typography.labelSmall
             )
 
             Text(
-                text = stringResource(mood.moodNameRes),
+                text = stringResource(moodUI.moodNameRes),
                 style = LumenTheme.typography.labelSmall,
                 color = LumenTheme.colors.onSurfaceVariant
             )

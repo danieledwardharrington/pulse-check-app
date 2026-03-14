@@ -9,6 +9,7 @@ import com.deh.lumen.core_data.database.LumenDatabase
 import com.deh.lumen.core_data.repository.CheckInRepository
 import com.deh.lumen.core_data.repository.UserRepository
 import com.deh.lumen.core_data.security.PassphraseManager
+import com.google.firebase.ai.FirebaseAI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -66,4 +67,8 @@ object CoreDataModule {
     fun providePassphraseManager(
         @ApplicationContext context: Context
     ): PassphraseManager = PassphraseManager(context)
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAi(): FirebaseAI = FirebaseAI.
 }

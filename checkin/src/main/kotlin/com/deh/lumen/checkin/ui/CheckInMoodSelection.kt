@@ -13,14 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.deh.lumen.checkin.R
-import com.deh.lumen.checkin.models.Mood
+import com.deh.lumen.checkin.models.MoodUI
 import com.deh.lumen.core_ui.theme.LumenTheme
 
 @Composable
 fun CheckInMoodSelection(
     modifier: Modifier = Modifier,
-    onMoodChange: (Mood) -> Unit,
-    moods: List<Mood>
+    onMoodChange: (MoodUI) -> Unit,
+    moods: List<MoodUI>
 ) {
     Column(
         modifier = modifier
@@ -46,7 +46,7 @@ fun CheckInMoodSelection(
             for (mood in moods) {
                 MoodOrb(
                     orbSize = orbSizeState.value,
-                    mood = mood,
+                    moodUI = mood,
                     onOrbClicked = {
                         onMoodChange(mood)
                         orbSize = 72

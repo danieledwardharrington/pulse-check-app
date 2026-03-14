@@ -49,7 +49,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.kotlin.datetime)
+    implementation(libs.bundles.hilt)
 
     implementation(libs.bundles.compose)
     implementation(project(":core-ui"))
+    implementation(project(":core-data"))
 }

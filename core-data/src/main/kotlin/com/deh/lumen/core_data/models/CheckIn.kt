@@ -13,11 +13,11 @@ data class CheckIn(
     val moodScore: Int,
     val moodLevel: MoodLevel,
     val questionAnswerPairs: List<QuestionAnswerPair>,
-    val editedAnswerPairs: List<QuestionAnswerPair>?,
+    val editedAnswerPairs: List<QuestionAnswerPair>? = null,
     val aiReflection: String,
     val safetyFlag: SafetyFlag?,
     val submittedAt: LocalDateTime,
-    val editedAt: LocalDateTime?
+    val editedAt: LocalDateTime? = null
 )
 
 fun CheckIn.toCheckInEntity(): CheckInEntity {

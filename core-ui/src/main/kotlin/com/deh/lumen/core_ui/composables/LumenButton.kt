@@ -32,7 +32,8 @@ fun LumenButton(
         onClick = { onButtonClick() },
         border = BorderStroke(1.dp, LumenTheme.colors.outline),
         colors = ButtonDefaults.buttonColors().copy(
-            containerColor = Color.Transparent
+            containerColor = Color.Transparent,
+            disabledContentColor = LumenTheme.colors.onSurface.copy(alpha = 0.12f)
         ),
         enabled = isEnabled,
         contentPadding = PaddingValues(),
@@ -48,7 +49,7 @@ fun LumenButton(
             Text(
                 text = buttonText,
                 style = LumenTheme.typography.titleSmall,
-                color = buttonTextColor
+                color = if (isEnabled) buttonTextColor else buttonTextColor.copy(alpha = 0.38f)
             )
         }
     }
@@ -85,7 +86,7 @@ fun LumenButton(
             Text(
                 text = buttonText,
                 style = LumenTheme.typography.titleSmall,
-                color = buttonTextColor
+                color = if (isEnabled) buttonTextColor else buttonTextColor.copy(alpha = 0.38f)
             )
         }
     }

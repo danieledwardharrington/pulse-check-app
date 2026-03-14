@@ -55,4 +55,6 @@ dependencies {
     implementation(libs.bundles.sqlcipher)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.security.crypto)
+
+    implementation(libs.bundles.firebase)
 }

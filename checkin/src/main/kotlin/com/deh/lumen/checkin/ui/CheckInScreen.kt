@@ -1,5 +1,7 @@
 package com.deh.lumen.checkin.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,68 +9,88 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.deh.lumen.checkin.R
-import com.deh.lumen.checkin.models.Mood
+import com.deh.lumen.checkin.models.MoodUI
+import com.deh.lumen.checkin.viewmodel.CheckInViewModel
 import com.deh.lumen.core_ui.composables.LumenButton
 import com.deh.lumen.core_ui.theme.LumenTheme
 
 @Composable
 fun CheckInScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(LumenTheme.colors.background),
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
+    val checkInViewModel = hiltViewModel<CheckInViewModel>()
+    val checkInState = checkInViewModel.checkInState.collectAsState()
+
+    val state = remember {
+        MutableTransitionState(false).apply {
+            targetState = true
+        }
+    }
+
+    AnimatedVisibility(visibleState = state) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+                .fillMaxSize()
                 .background(LumenTheme.colors.background),
-            verticalArrangement = Arrangement.spacedBy(32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
-            CheckInTitle(
-                greetingRes = R.string.greeting_morning,
-                titleQuestionRes = greetingQuestions().random(),
-                displayName = "Daniel"
-            )
-
-            CheckInMoodSelection(
-                moods = Mood.entries,
-                onMoodChange = {}
-            )
-
             Column(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .background(LumenTheme.colors.background),
+                verticalArrangement = Arrangement.spacedBy(32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                CheckInQuestionBox(
-                    checkInQuestion = "What's been weighing on you most today?",
-                    onResponseChanged = {}
+                CheckInTitle(
+                    greetingRes = R.string.greeting_morning,
+                    titleQuestionRes = greetingQuestions().random(),
+                    displayName = "Daniel"
                 )
 
-                CheckInQuestionBox(
-                    checkInQuestion = "Is there anything that gave you even a small moment of relief?",
-                    onResponseChanged = {}
+                CheckInMoodSelection(
+                    moods = MoodUI.entries,
+                    onMoodChange = checkInViewModel::onMoodSelected
                 )
+
+                AnimatedVisibility(
+                    visible = checkInState.value.shouldShowQuestions
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        CheckInQuestionBox(
+                            checkInQuestion = "What's been weighing on you most today?",
+                            onResponseChanged = checkInViewModel::onFirstResponseChanged
+                        )
+
+                        CheckInQuestionBox(
+                            checkInQuestion = "Is there anything that gave you even a small moment of relief?",
+                            onResponseChanged = checkInViewModel::onSecondResponseChanged
+                        )
+                    }
+                }
             }
-        }
 
-        LumenButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            buttonText = stringResource(R.string.complete_check_in),
-            onButtonClick = {}
-        )
+            LumenButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                buttonText = stringResource(R.string.complete_check_in),
+                onButtonClick = checkInViewModel::onContinueClicked,
+                isEnabled = checkInState.value.continueButtonEnabled
+            )
+        }
     }
 }
 

@@ -4,9 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 import com.deh.lumen.checkin.R
+import com.deh.lumen.core_data.entity.enum.MoodLevel
 import com.deh.lumen.core_ui.theme.LumenTheme
 
-enum class Mood(
+enum class MoodUI(
     val moodNameRes: Int,
     val moodEmoji: String
 ) {
@@ -42,4 +43,14 @@ enum class Mood(
             GOOD -> LumenTheme.extendedColors.moodGoodSubtle
             GREAT -> LumenTheme.extendedColors.moodGreatSubtle
         }
+}
+
+fun MoodUI.toMoodLevel(): MoodLevel {
+    return when (this) {
+        MoodUI.ROUGH -> MoodLevel.ROUGH
+        MoodUI.LOW -> MoodLevel.LOW
+        MoodUI.OKAY -> MoodLevel.OKAY
+        MoodUI.GOOD -> MoodLevel.GOOD
+        MoodUI.GREAT -> MoodLevel.GREAT
+    }
 }
