@@ -1,5 +1,7 @@
 package com.deh.lumen.onboarding.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +15,10 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,6 +47,11 @@ import com.deh.lumen.onboarding.ui.steps.PrivacyList
 fun OnboardingScreen(
     onboardingStep: OnboardingStep
 ) {
+    val titleText by remember { mutableIntStateOf(onboardingStep.titleRes) }
+    val descriptionText by remember { mutableStateOf(onboardingStep.descriptionRes) }
+    val supertitleText by remember { mutableStateOf(onboardingStep.supertitleRes) }
+    val logoRes by remember { mutableStateOf(onboardingStep.logo) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,37 +75,45 @@ fun OnboardingScreen(
             val textAlignment = if (isCenterAligned) TextAlign.Center else TextAlign.Start
 
             if (onboardingStep.logo != null) {
-                Image(
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally),
-                    painter = painterResource(onboardingStep.logo),
-                    contentDescription = stringResource(R.string.logo_content_description)
-                )
+                AnimatedContent(logoRes) {
+                    Image(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally),
+                        painter = painterResource(it!!),
+                        contentDescription = stringResource(R.string.logo_content_description)
+                    )
+                }
             }
 
             if (onboardingStep.supertitleRes != null) {
+                AnimatedContent(supertitleText) {
+                    Text(
+                        text = stringResource(it!!).uppercase(),
+                        textAlign = textAlignment,
+                        style = LumenTheme.typography.bodyMedium,
+                        color = LumenTheme.colors.onSurfaceVariant
+                    )
+                }
+            }
+
+            AnimatedContent(titleText) {
                 Text(
-                    text = stringResource(onboardingStep.supertitleRes).uppercase(),
+                    text = stringResource(it),
                     textAlign = textAlignment,
-                    style = LumenTheme.typography.bodyMedium,
-                    color = LumenTheme.colors.onSurfaceVariant
+                    style = LumenTheme.typography.headlineLarge.copy(fontStyle = FontStyle.Italic),
+                    color = LumenTheme.colors.onBackground
                 )
             }
 
-            Text(
-                text = stringResource(onboardingStep.titleRes),
-                textAlign = textAlignment,
-                style = LumenTheme.typography.headlineLarge.copy(fontStyle = FontStyle.Italic),
-                color = LumenTheme.colors.onBackground
-            )
-
             if (onboardingStep.descriptionRes != null) {
-                Text(
-                    text = stringResource(onboardingStep.descriptionRes),
-                    textAlign = TextAlign.Center,
-                    style = LumenTheme.typography.bodyMedium,
-                    color = LumenTheme.colors.onSurfaceVariant
-                )
+                AnimatedContent(descriptionText) {
+                    Text(
+                        text = stringResource(it!!),
+                        textAlign = TextAlign.Center,
+                        style = LumenTheme.typography.bodyMedium,
+                        color = LumenTheme.colors.onSurfaceVariant
+                    )
+                }
             }
 
             when (onboardingStep) {
@@ -123,23 +142,31 @@ fun OnboardingScreen(
                 .padding(all = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            LumenButton(
-                buttonText = stringResource(onboardingStep.firstButtonTextRes),
-                isEnabled = true, // TODO: enable/disable based on input/choices
-                onButtonClick = {
-                    // TODO: Continue button click
-                }
-            )
-
-            if (onboardingStep.secondButtonTextRes != null) {
+            AnimatedVisibility(
+                visible = true
+            ) {
                 LumenButton(
-                    buttonText = stringResource(onboardingStep.secondButtonTextRes),
-                    backgroundColor = Color.Transparent,
-                    buttonTextColor = LumenTheme.colors.onSurfaceVariant,
+                    buttonText = stringResource(onboardingStep.firstButtonTextRes),
+                    isEnabled = true, // TODO: enable/disable based on input/choices
                     onButtonClick = {
-                        // TODO: Negative button click
+                        // TODO: Continue button click
                     }
                 )
+            }
+
+            AnimatedVisibility(
+                visible = onboardingStep.secondButtonTextRes != null
+            ) {
+                if (onboardingStep.secondButtonTextRes != null) {
+                    LumenButton(
+                        buttonText = stringResource(onboardingStep.secondButtonTextRes),
+                        backgroundColor = Color.Transparent,
+                        buttonTextColor = LumenTheme.colors.onSurfaceVariant,
+                        onButtonClick = {
+                            // TODO: Negative button click
+                        }
+                    )
+                }
             }
         }
     }

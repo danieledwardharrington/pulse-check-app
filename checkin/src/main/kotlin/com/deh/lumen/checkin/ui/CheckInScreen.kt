@@ -70,12 +70,12 @@ fun CheckInScreen() {
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         CheckInQuestionBox(
-                            checkInQuestion = "What's been weighing on you most today?",
+                            checkInQuestion = checkInState.value.checkInEntry.questionsAnswers.first().question,
                             onResponseChanged = checkInViewModel::onFirstResponseChanged
                         )
 
                         CheckInQuestionBox(
-                            checkInQuestion = "Is there anything that gave you even a small moment of relief?",
+                            checkInQuestion = checkInState.value.checkInEntry.questionsAnswers.last().question,
                             onResponseChanged = checkInViewModel::onSecondResponseChanged
                         )
                     }

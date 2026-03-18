@@ -44,7 +44,8 @@ securityCrypto = "1.1.0"
 startupRuntime = "1.2.0"
 
 [libraries]
-billing = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
+billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
+billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -96,6 +97,10 @@ androidx-security-crypto = { group = "androidx.security", name = "security-crypt
 startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntime" }
 
 [bundles]
+billing = [
+    "billing",
+    "billing-ktx"
+]
 compose = [
     "compose-bom",
     "compose-material3",

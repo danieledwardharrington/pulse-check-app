@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteConstraintException
 import com.deh.lumen.core_data.QuestionAnswerPair
 import com.deh.lumen.core_data.dao.CheckInDao
 import com.deh.lumen.core_data.entity.CheckInEntity
-import com.deh.lumen.core_data.entity.enum.SafetyFlag
 import com.deh.lumen.core_data.models.SafetyStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate

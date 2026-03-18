@@ -4,11 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.deh.lumen.checkin.models.CheckInState
 import com.deh.lumen.checkin.models.MoodUI
+import com.deh.lumen.checkin.models.toMoodLevel
 import com.deh.lumen.checkin.usecase.GenerateQuestionsUseCase
 import com.deh.lumen.checkin.usecase.GenerateReflectionUseCase
 import com.deh.lumen.checkin.usecase.HasCheckedInUseCase
 import com.deh.lumen.checkin.usecase.SafetyUseCase
 import com.deh.lumen.checkin.usecase.SaveCheckInUseCase
+import com.deh.lumen.core_data.QuestionAnswerPair
+import com.deh.lumen.core_data.entity.enum.MoodLevel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,14 +32,46 @@ class CheckInViewModel @Inject constructor(
     private val _checkInState = MutableStateFlow(CheckInState())
     val checkInState: StateFlow<CheckInState> = _checkInState.asStateFlow()
 
+    init {
+        _checkInState.update { it.copy(showLoading = true) }
+        viewModelScope.launch {
+            _checkInState.update {
+                it.copy(
+                    hasCheckedInToday = hasCheckedInUseCase()
+                )
+            }
+        }.invokeOnCompletion {
+            _checkInState.update {
+                it.copy(showLoading = false)
+            }
+        }
+    }
+
     fun onMoodSelected(moodUI: MoodUI) {
         if (_checkInState.value.checkInEntry.selectedMoodUI != moodUI) {
             _checkInState.update {
                 it.copy(
                     checkInEntry = it
                         .checkInEntry
-                        .copy(selectedMoodUI = moodUI)
+                        .copy(selectedMoodUI = moodUI),
+                    showLoading = true
                 )
+            }
+        }
+
+        viewModelScope.launch {
+            generateQuestionsUseCase(moodUI.toMoodLevel())
+                .fold(
+                    onSuccess = {
+                        updateQuestions(it.first, it.second)
+                    },
+                    onFailure = { error ->
+                        Timber.e("Error generating questions: $error")
+                    }
+                )
+        }.invokeOnCompletion {
+            _checkInState.update {
+                it.copy(showLoading = false)
             }
         }
     }
@@ -53,7 +88,8 @@ class CheckInViewModel @Inject constructor(
                             ),
                             it.checkInEntry.questionsAnswers[1]
                         )
-                    )
+                    ),
+                continueButtonEnabled = response.isNotEmpty() && it.checkInEntry.questionsAnswers[1].answer.isNotEmpty()
             )
         }
     }
@@ -70,7 +106,8 @@ class CheckInViewModel @Inject constructor(
                                 answer = response
                             )
                         )
-                    )
+                    ),
+                continueButtonEnabled = response.isNotEmpty() && it.checkInEntry.questionsAnswers[0].answer.isNotEmpty()
             )
         }
     }
@@ -109,19 +146,46 @@ class CheckInViewModel @Inject constructor(
                             answers = savedEntity.questionAnswerPairs
                         ).onSuccess { status ->
                             if (status.flagged) {
-                                // TODO: Handle surfacing safety info
+                                _checkInState.update {
+                                    it
+                                        .copy(
+                                            surfaceSafetyInfo = true,
+                                            checkInEntry = it
+                                                .checkInEntry
+                                                .copy(safetyStatus = status)
+                                        )
+                                }
                             }
                         }
                     }.invokeOnCompletion { throwable ->
                         if (throwable != null) {
-                            Timber.e("Safety classification failed: $throwable")
+                            Timber.e("Safety classification failed, no safety status for this entry: $throwable")
                         }
                     }
+                    generateReflectionUseCase(
+                        moodLevel = savedEntity.moodLevel,
+                        answers = savedEntity.questionAnswerPairs
+                    ).fold(
+                        onSuccess = { reflection ->
+                            _checkInState.update {
+                                it.copy(checkInEntry = checkInState.value.checkInEntry.copy(aiReflection = reflection))
+                            }
+                        },
+                        onFailure = {
+                            Timber.e("Error generating reflection: $it")
+                        }
+                    )
                 },
                 onFailure = { error ->
                     Timber.e("Error saving user check in: $error")
                 }
             )
+        }
+    }
+
+    private fun dismissSafetyInfo() {
+        _checkInState.update {
+            it.copy(surfaceSafetyInfo = false)
         }
     }
 }
