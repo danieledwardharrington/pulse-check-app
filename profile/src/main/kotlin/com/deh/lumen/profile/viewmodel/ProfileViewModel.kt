@@ -5,6 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.deh.lumen.core_data.entity.toUserProfile
 import com.deh.lumen.core_data.repository.CheckInRepository
 import com.deh.lumen.core_data.repository.UserRepository
+import com.deh.lumen.core_ui.theme.LumenTheme
+import com.deh.lumen.profile.R
+import com.deh.lumen.profile.models.ProfileItem
 import com.deh.lumen.profile.models.ProfileState
 import com.deh.lumen.profile.usecase.DeleteAllDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +34,9 @@ class ProfileViewModel @Inject constructor(
             ProfileState.Initial
         } else {
             ProfileState.Ready(
-                userProfile = user.toUserProfile().copy(totalCheckInCount = totalCount, averageMoodScore = averageMood ?: 0f)
+                userProfile = user
+                    .toUserProfile()
+                    .copy(totalCheckInCount = totalCount, averageMoodScore = averageMood ?: 0f)
             )
         }
     }.stateIn(

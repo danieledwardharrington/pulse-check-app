@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="total_check_ins">Total check-ins</string>
+    <string name="average_mood_score">Average mood score</string>
+    <string name="best_month">Best month</string>
+    <string name="days_in_a_row">days in a row</string>
+    <string name="personal_best">Personal best</string>
+    <string name="member_since">Member since %1$s</string>
+    <string name="profile">Profile</string>
+    <string name="account_and_preferences">Your account &amp; preferences</string>
+
+    <!-- Section headers -->
+    <string name="current_streak">Current streak</string>
+    <string name="all_time">All time</string>
+    <string name="check_in">Check-in</string>
+    <string name="notifications_and_privacy">Notifications &amp; privacy</string>
+    <string name="insights_and_ai">Insights &amp; AI</string>
+    <string name="support_lumen">Support Lumen</string>
+    <string name="your_data">Your data</string>
+
+    <!-- Profile Items -->
+    <string name="daily_reminder_title">Daily Reminder</string>
+    <string name="daily_reminder_description">When would you like to check in?</string>
+    <string name="focus_areas_title">Focus Areas</string>
+    <string name="focus_areas_description">A life domain on which you want to reflect</string>
+    <string name="push_notifications_title">Push Notifications</string>
+    <string name="push_notifications_description">Notifications for daily reminders and weekly insights</string>
+    <string name="app_lock_title">App Lock</string>
+    <string name="app_lock_description">Require biometrics to open</string>
+    <string name="cloud_backup_title">Cloud Backup</string>
+    <string name="cloud_backup_description">Sync via your Lumen account</string>
+    <string name="monitoring_title">Wellbeing Monitoring</string>
+    <string name="monitoring_description">Surface resources if distress is detected</string>
+    <string name="insight_delivery_title">Weekly Insight Delivery</string>
+    <string name="insight_delivery_description">The day your summary is generated</string>
+
+    <!-- Donation -->
+    <string name="enjoying_lumen">Enjoying Lumen?</string>
+    <string name="buy_coffee">Buy me a coffee.</string>
+    <string name="donation_description">Lumen is built and maintained by one person. If it\'s been a
+    helpful part of your day, a small donation means a lot and helps keep the app going.</string>
+    <string name="processed_via_google_play">Processed via Google Play</string>
+    <string name="donate">Donate</string>
+
+    <string name="export_as_pdf">Export entries as PDF</string>
+    <string name="delete_data">Delete all my data</string>
+</resources>
