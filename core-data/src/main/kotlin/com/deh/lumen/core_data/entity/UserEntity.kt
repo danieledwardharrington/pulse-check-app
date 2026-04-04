@@ -8,10 +8,12 @@ import com.deh.lumen.core_data.entity.enum.UserIntention
 import com.deh.lumen.core_data.models.UserProfile
 import com.deh.lumen.core_data.models.toInsightDay
 import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.todayIn
 import kotlin.time.Clock
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -50,6 +52,7 @@ fun UserEntity.toUserProfile(): UserProfile {
         currentStreak = this.currentStreak,
         bestStreak = this.bestStreak,
         averageMoodScore = 0.0f,
-        notificationsEnabled = false
+        notificationsEnabled = false,
+        bestMonthDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
     )
 }

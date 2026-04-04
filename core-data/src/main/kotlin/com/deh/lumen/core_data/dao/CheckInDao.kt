@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.deh.lumen.core_data.CoreDataConstants
 import com.deh.lumen.core_data.entity.CheckInEntity
+import com.deh.lumen.core_data.models.BestMonth
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 
@@ -39,6 +40,17 @@ interface CheckInDao {
 
     @Query("SELECT AVG(moodScore) FROM ${CoreDataConstants.CHECK_IN_TABLE_NAME}")
     fun observeAverageMoodScore(): Flow<Float?>
+
+    @Query("""
+    SELECT strftime('%Y', date) AS year,
+           strftime('%m', date) AS month,
+           AVG(moodScore)       AS avgMood
+    FROM check_in
+    GROUP BY year, month
+    ORDER BY avgMood DESC
+    LIMIT 1
+""")
+    fun observeBestMonth(): Flow<BestMonth?>
 
     @Query("SELECT date FROM ${CoreDataConstants.CHECK_IN_TABLE_NAME} ORDER BY date DESC LIMIT 1")
     suspend fun getMostRecentDate(): LocalDate?

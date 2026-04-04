@@ -6,6 +6,7 @@ import com.deh.lumen.core_data.dao.CheckInDao
 import com.deh.lumen.core_data.entity.CheckInEntity
 import com.deh.lumen.core_data.models.SafetyStatus
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -32,6 +33,13 @@ class CheckInRepository @Inject constructor(
 
     fun observeAverageMoodScore(): Flow<Float?> =
         checkInDao.observeAverageMoodScore()
+
+    fun observeBestMonth(): Flow<LocalDate?> =
+        checkInDao.observeBestMonth().map { result ->
+            result?.let {
+                LocalDate(it.year.toInt(), it.month.toInt(), 1)
+            }
+        }
 
     suspend fun getCheckInsForRange(
         from: LocalDate,

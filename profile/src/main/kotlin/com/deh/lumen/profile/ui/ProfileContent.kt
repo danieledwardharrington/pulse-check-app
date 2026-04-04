@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -27,14 +28,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.room.ext.capitalize
 import com.deh.lumen.core_data.entity.enum.FocusArea
+import com.deh.lumen.core_data.format
 import com.deh.lumen.core_data.models.InsightDay
 import com.deh.lumen.core_data.models.UserProfile
+import com.deh.lumen.core_ui.composables.ThreeCardRow
 import com.deh.lumen.core_ui.theme.LumenTheme
 import com.deh.lumen.profile.R
 import com.deh.lumen.profile.models.ProfileState
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.todayIn
 import java.util.Locale
 import kotlin.time.Clock
 
@@ -98,7 +102,7 @@ fun ProfileContent(
                             text = stringResource(
                                 R.string.member_since,
                                 "${profileState.userProfile.memberSince.month.name.lowercase().capitalize(
-                                    Locale.ROOT)} ${profileState.userProfile.memberSince.year}"
+                                    Locale.getDefault())} ${profileState.userProfile.memberSince.year}"
                             ),
                             style = LumenTheme.typography.bodySmall,
                             color = LumenTheme.colors.onSurfaceVariant
@@ -132,61 +136,130 @@ fun ProfileContent(
         }
 
         item(key = "Streak") {
-            ProfileInfoCard(
-                startComposable = {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_flame),
-                        contentDescription = "Current streak",
-                        tint = if (profileState.userProfile.currentStreak > 0) {
+            StreakColumn(profileState = profileState)
+        }
+
+        item(key = "All Time") {
+            AllTimeColumn(profileState = profileState)
+        }
+    }
+}
+
+@Composable
+private fun StreakColumn(profileState: ProfileState.Ready) {
+    Column(
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        ColumnTitle(R.string.current_streak)
+
+        ProfileInfoCard(
+            startComposable = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_flame),
+                    contentDescription = "Current streak",
+                    tint = if (profileState.userProfile.currentStreak > 0) {
+                        LumenTheme.colors.tertiary
+                    } else {
+                        LumenTheme.colors.onSurfaceVariant.copy(alpha = 0.4f)
+                    }
+                )
+            },
+            middleComposable = {
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = profileState.userProfile.currentStreak.toString(),
+                        style = LumenTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Normal),
+                        color = if (profileState.userProfile.currentStreak > 0) {
                             LumenTheme.colors.tertiary
                         } else {
                             LumenTheme.colors.onSurfaceVariant.copy(alpha = 0.4f)
                         }
                     )
-                },
-                middleComposable = {
-                    Column(
-                        horizontalAlignment = Alignment.Start,
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text(
-                            text = profileState.userProfile.currentStreak.toString(),
-                            style = LumenTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Normal),
-                            color = if (profileState.userProfile.currentStreak > 0) {
-                                LumenTheme.colors.tertiary
-                            } else {
-                                LumenTheme.colors.onSurfaceVariant.copy(alpha = 0.4f)
-                            }
-                        )
 
-                        Text(
-                            text = stringResource(R.string.days_in_a_row),
-                            style = LumenTheme.typography.bodySmall,
-                            color = LumenTheme.colors.onSurfaceVariant
-                        )
-                    }
-                },
-                endComposable =  {
-                    Column(
-                        horizontalAlignment = Alignment.Start,
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text(
-                            text = profileState.userProfile.bestStreak.toString(),
-                            style = LumenTheme.typography.titleSmall,
-                            color = LumenTheme.colors.onSurface
-                        )
-
-                        Text(
-                            text = stringResource(R.string.personal_best).uppercase(),
-                            style = LumenTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium),
-                            color = LumenTheme.colors.onSurfaceVariant
-                        )
-                    }
+                    Text(
+                        text = stringResource(R.string.days_in_a_row),
+                        style = LumenTheme.typography.bodySmall,
+                        color = LumenTheme.colors.onSurfaceVariant
+                    )
                 }
-            )
-        }
+            },
+            endComposable =  {
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = profileState.userProfile.bestStreak.toString(),
+                        style = LumenTheme.typography.titleSmall,
+                        color = LumenTheme.colors.onSurface
+                    )
+
+                    Text(
+                        text = stringResource(R.string.personal_best).uppercase(),
+                        style = LumenTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium),
+                        color = LumenTheme.colors.onSurfaceVariant
+                    )
+                }
+            }
+        )
     }
+}
+
+@Composable
+private fun AllTimeColumn(
+    profileState: ProfileState.Ready
+) {
+    Column(
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        val bestMonthYear = profileState.userProfile.bestMonthDate.year
+        val isCurrentYear = bestMonthYear == Clock.System.todayIn(TimeZone.currentSystemDefault()).year
+
+        ColumnTitle(R.string.all_time)
+
+        ThreeCardRow(
+            horizontalPaddingValue = 16,
+            firstCardTitle = profileState.userProfile.totalCheckInCount.toString(),
+            secondCardTitle = profileState.userProfile.averageMoodScore.toString(),
+            thirdCardTitle = profileState
+                .userProfile
+                .bestMonthDate
+                .format("MMM"),
+            firstCardDescription = stringResource(R.string.total_check_ins),
+            secondCardDescription = stringResource(R.string.average_mood_score),
+            thirdCardDescription = if (isCurrentYear) stringResource(R.string.best_month) else bestMonthYear.toString(),
+            firstCardTitleColor = LumenTheme.colors.tertiary,
+            secondCardTitleColor = getMoodTitleColor(profileState.userProfile.averageMoodScore),
+            thirdCardTitleColor = LumenTheme.colors.tertiary,
+            containerColor = LumenTheme.colors.surfaceVariant,
+            outlineColor = LumenTheme.colors.outline
+        )
+    }
+}
+
+@Composable
+private fun getMoodTitleColor(moodScore: Float): Color {
+    return when {
+        moodScore >= 4.5f -> LumenTheme.extendedColors.moodGreat
+        moodScore >= 3.5f -> LumenTheme.extendedColors.moodGood
+        moodScore >= 2.5f -> LumenTheme.extendedColors.moodOkay
+        moodScore >= 1.5f -> LumenTheme.extendedColors.moodLow
+        else -> LumenTheme.extendedColors.moodStruggling
+    }
+}
+
+@Composable
+private fun ColumnTitle(titleRes: Int) {
+    Text(
+        text = stringResource(titleRes).capitalize(Locale.getDefault()),
+        style = LumenTheme.typography.titleSmall,
+        color = LumenTheme.colors.onSurfaceVariant
+    )
 }
 
 @Composable
@@ -219,7 +292,8 @@ private fun fakeProfileState(): ProfileState.Ready {
             monitoringEnabled = true,
             insightDay = InsightDay.SUNDAY,
             totalCheckInCount = 109,
-            averageMoodScore = 3.8f
+            averageMoodScore = 3.8f,
+            bestMonthDate = LocalDate(2026, 1, 1)
         )
     )
 }

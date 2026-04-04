@@ -36,7 +36,7 @@ vico = "3.0.3"
 
 billing = "8.3.0"
 
-sqlCipher = "4.14.0"
+sqlCipher = "4.14.1"
 sqlLite = "2.6.2"
 datastoreCore = "1.2.1"
 securityCrypto = "1.1.0"
@@ -113,6 +113,10 @@ compose = [
     "compose-coil",
     "compose-navigation",
     "compose-animation"
+]
+coroutines = [
+    "coroutines-android",
+    "coroutines-core"
 ]
 room = [
     "room-compiler",

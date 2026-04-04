@@ -50,11 +50,13 @@ dependencies {
 
     implementation(libs.bundles.room)
     implementation(libs.bundles.hilt)
-    implementation(libs.coroutines.core)
+    implementation(libs.bundles.coroutines)
 
     implementation(libs.bundles.sqlcipher)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.security.crypto)
+
+    implementation(libs.kotlin.datetime)
 
     implementation(libs.bundles.firebase)
 
