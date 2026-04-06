@@ -22,7 +22,7 @@ fun ProfileScreen() {
         } else {
             ProfileContent(
                 profileState = profileState.value as ProfileState.Ready,
-                onCheckChange = viewModel::onCheckChange
+                onNotificationItemSwitchChange = viewModel::onNotificationItemCheckChange
             )
         }
     }

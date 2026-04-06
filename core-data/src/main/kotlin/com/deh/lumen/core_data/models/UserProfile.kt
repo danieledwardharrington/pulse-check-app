@@ -1,11 +1,14 @@
 package com.deh.lumen.core_data.models
 
 import com.deh.lumen.core_data.entity.enum.FocusArea
+import com.deh.lumen.core_data.entity.enum.UserIntention
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 
 data class UserProfile(
+    val id: String,
     val displayName: String,
+    val intention: UserIntention,
     val memberSince: LocalDate,
     val reminderTime: LocalTime,
     val focusAreas: List<FocusArea>,

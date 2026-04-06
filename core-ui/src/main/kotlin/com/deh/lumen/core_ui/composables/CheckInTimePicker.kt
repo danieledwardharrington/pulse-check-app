@@ -1,4 +1,4 @@
-package com.deh.lumen.onboarding.ui.steps
+package com.deh.lumen.core_ui.composables
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -11,15 +11,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.deh.lumen.core_ui.theme.LumenTheme
+import kotlinx.datetime.LocalTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CheckInTimePicker(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    checkInTime: LocalTime = LocalTime(21, 0)
 ) {
     val timePickerState = rememberTimePickerState(
-        initialHour = 21,
-        initialMinute = 0,
+        initialHour = checkInTime.hour,
+        initialMinute = checkInTime.minute,
         is24Hour = false
     )
 

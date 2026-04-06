@@ -28,9 +28,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.room.ext.capitalize
 import com.deh.lumen.core_data.entity.enum.FocusArea
+import com.deh.lumen.core_data.entity.enum.UserIntention
 import com.deh.lumen.core_data.format
 import com.deh.lumen.core_data.models.InsightDay
 import com.deh.lumen.core_data.models.UserProfile
+import com.deh.lumen.core_ui.composables.CheckInTimePicker
+import com.deh.lumen.core_ui.composables.LumenChevronButton
+import com.deh.lumen.core_ui.composables.LumenDialog
 import com.deh.lumen.core_ui.composables.LumenSwitch
 import com.deh.lumen.core_ui.composables.ThreeCardRow
 import com.deh.lumen.core_ui.theme.LumenTheme
@@ -48,7 +52,8 @@ import kotlin.time.Clock
 fun ProfileContent(
     modifier: Modifier = Modifier,
     profileState: ProfileState.Ready,
-    onCheckChange: (Boolean, Int) -> Unit
+    onCheckInItemDialogToggled: () -> Unit,
+    onNotificationItemSwitchChange: (Boolean, Int) -> Unit
 ) {
     LazyColumn(
         modifier = modifier
@@ -146,12 +151,28 @@ fun ProfileContent(
             AllTimeColumn(profileState = profileState)
         }
 
-        item(key = "Check-In Section") {
+        item(key = "Check-in Section") {
+            LumenDialog(
+                onDismissClick = onCheckInItemDialogToggled
+            ) {
+                CheckInTimePicker(
+
+                )
+            }
             ProfileSection(
                 sectionTitle = R.string.check_in,
                 profileItems = checkInSectionItems(
+                    onDialogToggled = onCheckInItemDialogToggled
+                )
+            )
+        }
+
+        item(key = "Notifications and Privacy") {
+            ProfileSection(
+                sectionTitle = R.string.notifications_and_privacy,
+                profileItems = notificationsSectionItems(
                     profileState = profileState,
-                    onCheckChange = onCheckChange
+                    onCheckChange = onNotificationItemSwitchChange
                 )
             )
         }
@@ -276,7 +297,52 @@ private fun ColumnTitle(titleRes: Int) {
 }
 
 @Composable
-private fun checkInSectionItems(profileState: ProfileState.Ready, onCheckChange: (Boolean, Int) -> Unit): List<ProfileItem> {
+private fun checkInSectionItems(onDialogToggled: () -> Unit): List<ProfileItem> {
+    return listOf(
+        ProfileItem(
+            iconRes = R.drawable.ic_reminder,
+            iconColor = LumenTheme.colors.secondary,
+            iconBackgroundColor = LumenTheme.colors.secondary.copy(alpha = 0.15f),
+            titleRes = R.string.daily_reminder_title,
+            descriptionRes = R.string.daily_reminder_description,
+            onClick = {},
+            endAction = {
+                LumenChevronButton(
+                    onClick = onDialogToggled
+                )
+            }
+        ),
+        ProfileItem(
+            iconRes = R.drawable.ic_insight_delivery,
+            iconColor = LumenTheme.colors.onSurfaceVariant,
+            iconBackgroundColor = LumenTheme.colors.onSurfaceVariant.copy(alpha = 0.15f),
+            titleRes = R.string.insight_delivery_title,
+            descriptionRes = R.string.insight_delivery_description,
+            onClick = {},
+            endAction = {
+                LumenChevronButton(
+                    onClick = onDialogToggled
+                )
+            }
+        ),
+        ProfileItem(
+            iconRes = R.drawable.ic_focus_areas,
+            iconColor = LumenTheme.colors.primary,
+            iconBackgroundColor = LumenTheme.colors.primary.copy(alpha = 0.15f),
+            titleRes = R.string.focus_areas_title,
+            descriptionRes = R.string.focus_areas_description,
+            onClick = {},
+            endAction = {
+                LumenChevronButton(
+                    onClick = onDialogToggled
+                )
+            }
+        )
+    )
+}
+
+@Composable
+private fun notificationsSectionItems(profileState: ProfileState.Ready, onCheckChange: (Boolean, Int) -> Unit): List<ProfileItem> {
     return listOf(
         ProfileItem(
             iconRes = R.drawable.ic_notifications,
@@ -322,6 +388,21 @@ private fun checkInSectionItems(profileState: ProfileState.Ready, onCheckChange:
                     itemTitleRes = R.string.cloud_backup_title
                 )
             }
+        ),
+        ProfileItem(
+            iconRes = R.drawable.ic_wellbeing,
+            iconColor = LumenTheme.extendedColors.moodGood,
+            iconBackgroundColor = LumenTheme.extendedColors.moodGood.copy(alpha = 0.15f),
+            titleRes = R.string.monitoring_title,
+            descriptionRes = R.string.monitoring_description,
+            onClick = { },
+            endAction = {
+                LumenSwitch(
+                    isChecked = profileState.userProfile.monitoringEnabled,
+                    onCheckChange = onCheckChange,
+                    itemTitleRes = R.string.monitoring_title
+                )
+            }
         )
     )
 }
@@ -336,7 +417,8 @@ private fun PreviewProfileContent() {
         ) {
             ProfileContent(
                 profileState = fakeProfileState(),
-                onCheckChange = { _, _ -> }
+                onNotificationItemSwitchChange = { _, _ -> },
+                onCheckInItemDialogToggled = {}
             )
         }
     }
@@ -345,6 +427,7 @@ private fun PreviewProfileContent() {
 private fun fakeProfileState(): ProfileState.Ready {
     return ProfileState.Ready(
         userProfile = UserProfile(
+            id = "1",
             displayName = "Daniel",
             currentStreak = 31,
             bestStreak = 44,
@@ -358,7 +441,8 @@ private fun fakeProfileState(): ProfileState.Ready {
             insightDay = InsightDay.SUNDAY,
             totalCheckInCount = 109,
             averageMoodScore = 3.8f,
-            bestMonthDate = LocalDate(2026, 1, 1)
+            bestMonthDate = LocalDate(2026, 1, 1),
+            intention = UserIntention.SUPPORT_THERAPY
         )
     )
 }
