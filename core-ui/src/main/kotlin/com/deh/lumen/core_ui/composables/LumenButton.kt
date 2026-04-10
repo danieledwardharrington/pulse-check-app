@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.deh.lumen.core_ui.theme.LumenTheme
@@ -23,7 +24,8 @@ fun LumenButton(
     buttonText: String,
     onButtonClick: () -> Unit,
     buttonTextColor: Color = LumenTheme.colors.onPrimary,
-    isEnabled: Boolean = true
+    isEnabled: Boolean = true,
+    backgroundGradient: Brush = LumenTheme.extendedColors.gradientCta
 ) {
     Button(
         modifier = modifier
@@ -42,7 +44,7 @@ fun LumenButton(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(LumenTheme.extendedColors.gradientCta)
+                .background(backgroundGradient)
                 .then(modifier),
             contentAlignment = Alignment.Center
         ) {

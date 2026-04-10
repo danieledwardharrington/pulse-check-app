@@ -28,7 +28,8 @@ fun ProfileSection(
     ) {
         Text(
             text = stringResource(sectionTitle).uppercase(),
-            style = LumenTheme.typography.titleSmall
+            style = LumenTheme.typography.titleSmall,
+            color = LumenTheme.colors.onSurfaceVariant
         )
 
         ProfileSettingsColumn(

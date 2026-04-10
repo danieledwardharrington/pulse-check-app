@@ -3,6 +3,7 @@ package com.deh.lumen.core_ui.composables
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -41,10 +42,10 @@ fun ThreeCardRow(
     Row(
         modifier = modifier
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         val screenWidth = LocalConfiguration.current.screenWidthDp
-        val cardDimen = (screenWidth - horizontalPaddingValue) / 3
+        val cardDimen = (screenWidth - horizontalPaddingValue - 24) / 3
 
         Card(
             modifier = Modifier
@@ -55,22 +56,26 @@ fun ThreeCardRow(
             ),
             border = BorderStroke(1.dp, outlineColor)
         ) {
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = firstCardTitle,
-                    style = LumenTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Normal),
-                    color = firstCardTitleColor
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = firstCardTitle,
+                        style = LumenTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Normal),
+                        color = firstCardTitleColor
+                    )
 
-                Text(
-                    text = firstCardDescription,
-                    style = LumenTheme.typography.bodySmall,
-                    color = LumenTheme.colors.onSurfaceVariant
-                )
+                    Text(
+                        text = firstCardDescription,
+                        style = LumenTheme.typography.bodySmall,
+                        color = LumenTheme.colors.onSurfaceVariant
+                    )
+                }
             }
         }
 
@@ -83,22 +88,26 @@ fun ThreeCardRow(
             ),
             border = BorderStroke(1.dp, outlineColor)
         ) {
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = secondCardTitle,
-                    style = LumenTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Normal),
-                    color = secondCardTitleColor
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = secondCardTitle,
+                        style = LumenTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Normal),
+                        color = secondCardTitleColor
+                    )
 
-                Text(
-                    text = secondCardDescription,
-                    style = LumenTheme.typography.bodySmall,
-                    color = LumenTheme.colors.onSurfaceVariant
-                )
+                    Text(
+                        text = secondCardDescription,
+                        style = LumenTheme.typography.bodySmall,
+                        color = LumenTheme.colors.onSurfaceVariant
+                    )
+                }
             }
         }
 
@@ -111,22 +120,26 @@ fun ThreeCardRow(
             ),
             border = BorderStroke(1.dp, outlineColor)
         ) {
-            Column(
+            Box(
                 modifier = Modifier
                     .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = thirdCardTitle,
-                    style = LumenTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Normal),
-                    color = thirdCardTitleColor
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = thirdCardTitle,
+                        style = LumenTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Normal),
+                        color = thirdCardTitleColor
+                    )
 
-                Text(
-                    text = thirdCardDescription,
-                    style = LumenTheme.typography.bodySmall,
-                    color = LumenTheme.colors.onSurfaceVariant
-                )
+                    Text(
+                        text = thirdCardDescription,
+                        style = LumenTheme.typography.bodySmall,
+                        color = LumenTheme.colors.onSurfaceVariant
+                    )
+                }
             }
         }
     }

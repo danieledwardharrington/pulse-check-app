@@ -94,6 +94,7 @@ data class LumenExtendedColors(
     val glowViolet: Color,
     val glowRose: Color,
     val glowGold: Color,
+    val outlineGold: Color
 )
 
 private val LumenDarkExtendedColors = LumenExtendedColors(
@@ -129,6 +130,7 @@ private val LumenDarkExtendedColors = LumenExtendedColors(
     glowViolet = LumenColor.AccentVioletGlow,
     glowRose = LumenColor.AccentRoseGlow,
     glowGold = LumenColor.AccentGoldGlow,
+    outlineGold = LumenColor.AccentGoldSubtle
 )
 
 data class LumenSpacing(

@@ -41,6 +41,12 @@
     helpful part of your day, a small donation means a lot and helps keep the app going.</string>
     <string name="processed_via_google_play">Processed via Google Play</string>
     <string name="donate">Donate</string>
+    <string name="small_donation">\$1</string>
+    <string name="medium_donation">\$3</string>
+    <string name="large_donation">\$5</string>
+    <string name="sip">Sip</string>
+    <string name="cup">Cup</string>
+    <string name="pot">Pot</string>
 
     <string name="export_as_pdf">Export entries as PDF</string>
     <string name="delete_data">Delete all my data</string>
