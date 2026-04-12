@@ -26,6 +26,7 @@ import com.deh.lumen.profile.R
 @Composable
 fun ProfileDonation(
     modifier: Modifier = Modifier,
+    onAmountClicked: (Int) -> Unit,
     onDonationClick: () -> Unit
 ) {
     Column(
@@ -129,7 +130,8 @@ private fun PreviewProfileDonation() {
                 .background(LumenTheme.colors.background)
         ) {
             ProfileDonation(
-                onDonationClick = {}
+                onDonationClick = {},
+                onAmountClicked = {}
             )
         }
     }

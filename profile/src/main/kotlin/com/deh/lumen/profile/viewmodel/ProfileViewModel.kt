@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
 import javax.inject.Inject
@@ -108,6 +109,24 @@ class ProfileViewModel @Inject constructor(
                 }
             }
             saveUserProfile()
+        }
+    }
+
+    fun onCheckInTimeConfirmed(checkInTime: LocalTime) {
+        _profileState.update { state ->
+            (state as ProfileState.Ready).copy(
+                userProfile = state.userProfile.copy(reminderTime = checkInTime)
+            )
+        }
+        saveUserProfile()
+    }
+
+    fun deleteUserData() {
+        // TODO: Show confirmation dialog first
+        viewModelScope.launch {
+            deleteAllDataUseCase()
+        }.invokeOnCompletion {
+            // TODO: Navigate to login screen
         }
     }
 

@@ -63,6 +63,7 @@ fun LumenButton(
     buttonText: String,
     onButtonClick: () -> Unit,
     backgroundColor: Color,
+    outlineColor: Color = LumenTheme.colors.outline,
     buttonTextColor: Color = LumenTheme.colors.onPrimary,
     isEnabled: Boolean = true
 ) {
@@ -71,7 +72,7 @@ fun LumenButton(
             .height(56.dp)
             .fillMaxWidth(),
         onClick = { onButtonClick() },
-        border = BorderStroke(1.dp, LumenTheme.colors.outline),
+        border = BorderStroke(1.dp, outlineColor),
         colors = ButtonDefaults.buttonColors().copy(
             containerColor = backgroundColor
         ),

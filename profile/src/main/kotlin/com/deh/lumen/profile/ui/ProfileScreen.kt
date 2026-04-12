@@ -23,8 +23,9 @@ fun ProfileScreen() {
             ProfileContent(
                 profileState = profileState.value as ProfileState.Ready,
                 onNotificationItemSwitchChange = viewModel::onNotificationItemCheckChange,
-                onCheckInItemDialogToggled = {}, // viewModel::onCheckInItemDialogToggled,
-                onCheckInTimeConfirmed = {} // viewModel::onCheckInTimeConfirmed
+                onCheckInItemDialogToggled = viewModel::onShowCheckInOptionDialog,
+                onCheckInTimeConfirmed = viewModel::onCheckInTimeConfirmed,
+                onDeleteDataClicked = viewModel::deleteUserData
             )
         }
     }

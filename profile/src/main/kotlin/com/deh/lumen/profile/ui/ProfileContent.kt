@@ -52,7 +52,8 @@ fun ProfileContent(
     profileState: ProfileState.Ready,
     onCheckInItemDialogToggled: () -> Unit,
     onNotificationItemSwitchChange: (Boolean, Int) -> Unit,
-    onCheckInTimeConfirmed: (LocalTime) -> Unit
+    onCheckInTimeConfirmed: (LocalTime) -> Unit,
+    onDeleteDataClicked: () -> Unit
 ) {
     LazyColumn(
         modifier = modifier
@@ -177,7 +178,21 @@ fun ProfileContent(
         }
 
         item(key = "Support Lumen") {
+            ProfileDonation(
+                onDonationClick = {
+                    // TODO: Implement donations
+                },
+                onAmountClicked = {}
+            )
+        }
 
+        item(key = "Data") {
+            YourData(
+                onExportEntriesClicked = {
+                    // TODO: Implement export to PDF
+                },
+                onDeleteDataClicked = onDeleteDataClicked
+            )
         }
     }
 }
@@ -422,7 +437,8 @@ private fun PreviewProfileContent() {
                 profileState = fakeProfileState(),
                 onNotificationItemSwitchChange = { _, _ -> },
                 onCheckInItemDialogToggled = {},
-                onCheckInTimeConfirmed = {}
+                onCheckInTimeConfirmed = {},
+                onDeleteDataClicked = {}
             )
         }
     }
