@@ -29,7 +29,7 @@ class ProfileViewModel @Inject constructor(
     private val checkInRepository: CheckInRepository,
     private val deleteAllDataUseCase: DeleteAllDataUseCase
 ): ViewModel() {
-    private val _profileState: MutableStateFlow<ProfileState> = combine(
+    private val _profileState: MutableStateFlow<ProfileState> = MutableStateFlow(combine(
         userRepository.observeUser(),
         checkInRepository.observeTotalCount(),
         checkInRepository.observeAverageMoodScore(),
@@ -53,7 +53,7 @@ class ProfileViewModel @Inject constructor(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = ProfileState.Initial
-    ) as MutableStateFlow<ProfileState>
+    ).value)
 
     val profileState = _profileState.asStateFlow()
 
